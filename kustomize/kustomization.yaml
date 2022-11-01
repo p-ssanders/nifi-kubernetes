@@ -1,0 +1,4 @@
+resources:
+  - service.yaml
+  - httpproxy.yaml
+  - stateful-set.yaml
