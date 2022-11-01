@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nifi
+  namespace: nifi
+  labels:
+    app.kubernetes.io/part-of: nifi-system
+  annotations:
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: contour
+  rules:
+  - host: nifi.tap.h2o-2-1249.h2o.vmware.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: nifi
+            port:
+              number: 8443
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - nifi.tap.h2o-2-1249.h2o.vmware.com
+    secretName: tanzu-system-ingress-tap
